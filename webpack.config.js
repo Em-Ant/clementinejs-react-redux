@@ -2,7 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  devtool: '#source-map',
+  devtool: 'eval',
   entry: [
     path.join(__dirname,'client','src','index.jsx')
   ],
@@ -11,12 +11,6 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: '/static/'},
   target: "web",
-  plugins: [
-    new webpack.ProvidePlugin({
-       $: "jquery",
-       jQuery: "jquery"
-   })
- ],
   module: {
     loaders: [
       {
@@ -24,7 +18,7 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/,
         query: {
-          presets: ['react']
+          presets: ['react', 'es2015']
         }
       }, {
        test: /\.css$/,

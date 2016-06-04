@@ -4,8 +4,6 @@ var React = require('react');
 var connect = require('react-redux').connect;
 var actionCreators = require('../actions.js');
 
-var Button = require('react-bootstrap').Button;
-
 var Login = React.createClass({
   render: function () {
     return (
@@ -14,9 +12,9 @@ var Login = React.createClass({
           <img src="img/clementine_150.png" />
           <br />
           <p className="clementine-text">Deployment test</p>
-          <Button bsStyle="primary" href="auth/twitter">
+          <button bsStyle="primary" href="auth/twitter">
             Added Customizable Bootstrap (I'm a btn-primary!)
-          </Button>
+          </button>
           <p>and jQuery...</p>
         </div>
       </div>

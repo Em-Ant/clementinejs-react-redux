@@ -16,15 +16,12 @@ var Router = require('react-router').Router;
 var Route = require('react-router').Route;
 var IndexRoute = require('react-router').IndexRoute;
 
-var history = require('./history.js');
 
 var thunk = require('redux-thunk');
 
 var actions = require('./actions.js');
 
 const store = createStore(reducer,applyMiddleware(thunk));
-var $ = require('jquery');
-require('bootstrap-loader');
 
 var App = React.createClass({
   componentDidMount: function() {
@@ -42,7 +39,7 @@ var App = React.createClass({
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={history}>
+    <Router >
       <Route path="/" component={App}>
         <IndexRoute component={Login} />
         <Route path="/main" component={Main} />

@@ -1,7 +1,7 @@
 
 
 var appUrl = window.location.origin;
-var history = require('./history.js');
+import {history} from 'react-router';
 
 function setClicks(nClicks) {
   return {type: 'SET_CLICKS', clicks: nClicks};

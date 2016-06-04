@@ -6,9 +6,6 @@ var React = require('react');
 var connect = require('react-redux').connect;
 var actionCreators = require('../actions.js');
 
-var Button = require('react-bootstrap').Button;
-var ButtonToolbar = require('react-bootstrap').ButtonToolbar;
-
 var Main = React.createClass({
 
   render: function () {

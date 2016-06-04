@@ -1,17 +1,15 @@
-'use strict';
 
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+import mongoose, { Schema } from 'mongoose';
 
-var User = new Schema({
-	twitter: {
-		id: String,
-		displayName: String,
-		username: String,
-	},
-   nbrClicks: {
-      clicks: Number
-   }
+const User = new Schema({
+  twitter: {
+    id: String,
+    displayName: String,
+    username: String,
+  },
+  nbrClicks: {
+    clicks: Number,
+  },
 });
 
-module.exports = mongoose.model('User', User);
+export default mongoose.model('User', User);

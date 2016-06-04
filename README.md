@@ -1,55 +1,89 @@
-# Options Inc. Web Application
+# Clementine-React-Redux MERN Stack Boilerplate
+
 
 ## Overview
 
-This is transportation routing web application for Options Inc.  This is a non profit project for [Free Code Camp](http://www.freecodecamp.com)
+Clementine.js is a lightweight boilerplate for fullstack JavaScript development which utilizes MongoDB, Express and Node.js. The boilerplate errs on the side of transparency and simplicity, making it an ideal starting point for beginner and seasoned developers alike.
 
-A running version of this application can be found at https://options-inc.herokuapp.com
+The original [Free Code Camp](http://www.freecodecamp.com) version by [@johnstonbl01](https://github.com/johnstonbl01) uses Angular 1.x as front-end framework.
 
-## Build
+I modified it to obtain a **MERN Stack** version which uses [React](https://facebook.github.io/react/), [Redux](https://github.com/reactjs/redux), and includes Twitter authentication using [Passport](http://passportjs.org/).
 
-To build and run the project, you must have the following applications installed.
+# Quick Start Guide
 
-* Node    
-* NPM
-* MongoDB  
+### Prerequisites
 
-Run the following command to install the dependencies the application needs
+In order to use Clementine-React-Redux, you must have the following installed:
 
-    $ npm install 
+- [Node.js](https://nodejs.org/)
+- [NPM](https://nodejs.org/)
+- [MongoDB](http://www.mongodb.org/)
+- [Git](https://git-scm.com/)
 
-## Run
+### Installation & Startup
 
-Create a ```.env``` file in the root directory and input the environment variables.  There is a sample .env template found in ```/.env.sample``` that you can use.
+To install Clementine-React-Redux, simply enter the below in the terminal window:
 
-Start MongoDB
+```bash
+$ git clone https://github.com/Em-Ant/clementinejs-react-redux your-project
+```
 
-In a separate terminal, run the following command to start the server 
+To install the dependencies, enter the following in your terminal:
 
-    $ node server
+```
+$ cd your-project
+$ npm install
+```
 
-Open your application url in a browser to view the application
+This will install the Clementine-React-Redux components into the `your-project` directory.
 
-    http://localhost:8080
+### Setup Twitter Authentication
 
+Create a new App [here](https://apps.twitter.com/) and get API keys / secrets.
+
+### Local Environment Variables
+
+Create a file named `.env` in the root directory. This file should contain:
+
+```
+TWITTER_CONSUMER_KEY=your-client-id-here
+TWITTER_CONSUMER_SECRET=your-client-secret-here
+MONGODB_URI=mongodb://localhost:27017/clementinejs
+PORT=8080
+APP_URL=http://localhost:8080/
+```
+
+### Starting the App
+
+To start the app, make sure you're in the project directory and type `npm run serve` into the terminal. This will start the Node server and connect to MongoDB.
+
+You should the following messages within the terminal window:
+
+```
+Node.js listening on port 8080...
+```
+
+Next, open your browser and enter `http://localhost:8080/`. Congrats, you're up and running!
+
+### Build for production
+
+Type `npm run build`. You'll get the minified bundles and the compiled es6
+into the directory `./dist`
 
 ## Features
 
-| Front End Features 
-|:---------    
-| Javascript
-| React    
-| Redux
-| Webpack  
-
-| Back End Features 
-|:---------   
-| Node.js     
-| Javascript    
-| MongoDB           
-| Mongoose 
-| Express      
-| Passport         
+| Features           |
+|:---------          |
+| MongoDB            |
+| Express            |
+| React              |
+| Redux              |
+| React-router       |
+| ES6 - Babel        |
+| Node.js            |
+| Passport           |
+| Mongoose           |
+| ESLint - airbnb    |
 
 ## License
 

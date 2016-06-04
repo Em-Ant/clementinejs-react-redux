@@ -106,7 +106,7 @@ img {
 
 .clementine-text { /* Styling for the Clementine.js text */
 	padding: 0;
-	margin: -25px 0 0 0;
+	margin: 20 0;
 	font-weight: 500;
 	font-size: 60px;
 	color: #FFA000;
@@ -116,16 +116,14 @@ img {
   float: none !important;
 }
 
-/* MULTILINE COMMENT */
-.noop {
-/****** Click Styling ******/
 
 .btn-container {	/* Styling for the div that contains the buttons */
 	margin: -10px auto 0 auto;
 	text-align: center;
 }
 
-.btn {	/* Styling for buttons */
+
+.btn {    /* Styling for buttons */
 	margin: 0 8px;
   color: white;
 	background-color: #00BCD4;
@@ -146,7 +144,7 @@ img {
 	-webkit-transform: scale(0.9, 0.9);
 	-moz-transform: scale(0.9, 0.9);
 }
-}
+
 .btn-delete {	/* Styling for delete button */
 	background-color: #ECEFF1;
 	color: #212121;

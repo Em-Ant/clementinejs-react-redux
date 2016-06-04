@@ -1,53 +1,52 @@
-'use strict'
 
-var Link = require('react-router').Link
+import { getUser, getClicks } from '../reducer';
+import { Link } from 'react-router';
 
-var React = require('react');
-var connect = require('react-redux').connect;
-var actionCreators = require('../actions.js');
+import React from 'react';
+import { connect } from 'react-redux';
+import * as actionCreators from '../actions';
 
-var Button = require('react-bootstrap').Button;
-var ButtonToolbar = require('react-bootstrap').ButtonToolbar;
+const Main = ({ click, reset, clicks, user }) => (
+  <div>
+    <header>
+      <p>Welcome, <span id="display-name">{user.username}</span>!</p>
+      <Link className="menu" to="/profile">Profile</Link>
+      <p>|</p>
+      <a className="menu" href="/logout">Logout</a>
+    </header>
 
-var Main = React.createClass({
+    <div className="container">
+      <img alt="logo" src="img/clementine_150.png" />
+      <br />
+      <p className="clementine-text">Clementine.js</p>
+    </div>
 
-  render: function () {
-    return (
-      <div>
-        <header>
-          <p>Welcome, <span id="display-name">{this.props.user.username}</span>!</p>
-          <Link className="menu" to="/profile">Profile</Link>
-          <p>|</p>
-          <a className="menu" href="/logout">Logout</a>
-        </header>
-
-        <div className="container">
-          <img src="img/clementine_150.png" />
-          <br />
-          <p className="clementine-text">Clementine.js</p>
-        </div>
-
-        <div className="container">
-          <p>You have clicked the button <span id="click-nbr">{this.props.clicks}</span> times.</p>
-          <br />
-          <div className="btn-container">
-            <ButtonToolbar className="text-center">
-              <Button onClick={this.props.click} className="btn-nofloat">CLICK ME!</Button>
-              <Button onClick={this.props.reset} className="btn-nofloat">RESET</Button>
-            </ButtonToolbar>
-          </div>
-        </div>
+    <div className="container">
+      <p>You have clicked the button <span id="click-nbr">{clicks}</span> times.</p>
+      <br />
+      <div className="btn-container">
+        <button onClick={click} className="btn">CLICK ME!</button>
+        <button onClick={reset} className="btn">RESET</button>
       </div>
-    )
-  }
-});
+    </div>
+  </div>
+);
 
-function mapProps(state) {
+Main.propTypes = {
+  click: React.PropTypes.func.isRequired,
+  reset: React.PropTypes.func.isRequired,
+  clicks: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.number]).isRequired,
+  user: React.PropTypes.object.isRequired,
+};
+
+function mapStateToProps(state) {
   return {
-    user: state.get('user') || {username: 'Guest'},
-    clicks: state.get('clicks')
-  }
+    user: getUser(state),
+    clicks: getClicks(state),
+  };
 }
 
-module.exports.Main = Main;
-module.exports.MainContainer = connect(mapProps, actionCreators)(Main);
+export const MainComponent = Main;
+export const MainContainer = connect(mapStateToProps, actionCreators)(Main);

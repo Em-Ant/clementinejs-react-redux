@@ -1,48 +1,48 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var css = require('../style/main.scss');
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 
-var Main = require('./components/main.jsx').MainContainer;
-var Login = require('./components/login.jsx').Login;
-var Profile = require('./components/profile.jsx').ProfileContainer;
+import { MainContainer as Main } from './components/main.jsx';
+import Login from './components/login.jsx';
+import { ProfileContainer as Profile } from './components/profile.jsx';
 
-var reducer = require('./reducer.js');
-var Provider = require('react-redux').Provider;
-var createStore = require('redux').createStore;
-var applyMiddleware = require('redux').applyMiddleware;
+import reducer from './reducer';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
 
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
-var Router = require('react-router').Router;
-var Route = require('react-router').Route;
-var IndexRoute = require('react-router').IndexRoute;
+import thunk from 'redux-thunk';
 
-var history = require('./history.js');
+import * as actions from './actions.js';
 
-var thunk = require('redux-thunk');
+// eslint-disable-next-line no-unused-vars
+import css from '../style/main.scss';
 
-var actions = require('./actions.js');
+const store = createStore(reducer, applyMiddleware(thunk));
 
-const store = createStore(reducer,applyMiddleware(thunk));
-var $ = require('jquery');
-require('bootstrap-loader');
-
-var App = React.createClass({
-  componentDidMount: function() {
+class App extends Component {
+  componentDidMount() {
     store.dispatch(actions.requestUser());
-  },
-  render: function () {
+  }
+  render() {
     return (
       <div>
         {this.props.children}
       </div>
-    )
+    );
   }
-});
+}
 
+App.propTypes = {
+  children: React.PropTypes.oneOfType([
+    React.PropTypes.arrayOf(React.PropTypes.node),
+    React.PropTypes.node,
+  ]),
+};
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={history}>
+    <Router history={browserHistory}>
       <Route path="/" component={App}>
         <IndexRoute component={Login} />
         <Route path="/main" component={Main} />

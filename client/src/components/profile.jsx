@@ -1,36 +1,49 @@
-//<a className="menu"  href='#' onClick={this.props.setPage.bind(null,'main')}>Home</a>
 
-'use strict'
+import React from 'react';
+import { connect } from 'react-redux';
+import * as actionCreators from '../actions';
 
-var React = require('react');
-var connect = require('react-redux').connect;
-var actionCreators = require('../actions.js');
+import { getUser } from '../reducer';
+import { Link } from 'react-router';
 
-var Link = require('react-router').Link;
+const Profile = ({ user }) => (
+  <div className="container">
+    <div className="twitter-profile">
+      <img src="img/twitter_32px.png" alt="twitter logo" />
+      <p>
+        <span>ID: </span>
+        <span id="profile-id" className="profile-value">
+          {user.id}
+        </span>
+      </p>
+      <p>
+        <span>Username: </span>
+        <span id="profile-username" className="profile-value">
+          {user.username}
+        </span>
+      </p>
+      <p>
+        <span>Display Name: </span>
+        <span id="display-name" className="profile-value">
+          {user.displayName}
+        </span>
+      </p>
+      <Link className="menu" to="/main" >Home</Link>
+      <p id="menu-divide">|</p>
+      <a className="menu" href="/logout">Logout</a>
+    </div>
+  </div>
+);
 
-var Profile = React.createClass({
-  render: function () {
-    return (
-      <div className="container">
-        <div className="twitter-profile">
-          <img src="img/twitter_32px.png" alt="twitter logo" />
-          <p><span>ID: </span><span id="profile-id" className="profile-value">{this.props.user.id}</span></p>
-          <p><span>Username: </span><span id="profile-username" className="profile-value">{this.props.user.username}</span></p>
-          <p><span>Display Name: </span><span id="display-name" className="profile-value">{this.props.user.displayName}</span></p>
-          <Link className="menu" to="/main" >Home</Link>
-          <p id="menu-divide">|</p>
-          <a className="menu"  href='/logout'>Logout</a>
-        </div>
-      </div>
-    )
-  }
-})
+Profile.propTypes = {
+  user: React.PropTypes.object,
+};
 
-function mapProps(state) {
+function mapStateToProps(state) {
   return {
-    user: state.get('user') || {},
-  }
+    user: getUser(state),
+  };
 }
 
-module.exports.Profile = Profile;
-module.exports.ProfileContainer = connect(mapProps, actionCreators)(Profile);
+export const ProfileComponent = Profile;
+export const ProfileContainer = connect(mapStateToProps, actionCreators)(Profile);

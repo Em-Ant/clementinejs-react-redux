@@ -1,26 +1,37 @@
 
-Map = require('immutable').Map
-
 function setClicks(state, clicks) {
-  return state.set('clicks', clicks).delete('loading');
+  return {
+    ...state,
+    clicks,
+    loading: undefined,
+  };
 }
 
 function setLoading(state, what) {
-  return state.set('loading', what)
+  return {
+    ...state,
+    loading: what,
+  };
 }
 
-function logIn(state, user, nClicks) {
-  return state.set('loggedIn', true).set('user', user)
+function logIn(state, user) {
+  return {
+    ... state,
+    user,
+  };
 }
 
 function logOut(state) {
-  return state.set('loggedIn', false).delete('user');
+  return {
+    ...state,
+    loggedIn: false,
+    user: undefined,
+  };
 }
 
-var initState = Map({clicks: 0, loggedIn: false, page: 'main'});
+const initState = { clicks: 0, loggedIn: false, page: 'main' };
 
-module.exports = function(state, action) {
-  state = state || initState;
+export default (state = initState, action) => {
   switch (action.type) {
     case 'SET_CLICKS':
       return setClicks(state, action.clicks);
@@ -34,3 +45,6 @@ module.exports = function(state, action) {
       return state;
   }
 };
+
+export const getUser = state => state.user || { username: 'guest' };
+export const getClicks = state => state.clicks || '0';

@@ -2,6 +2,9 @@ node_modules/
 .eslintrc
 .env
 
+# dist
+dist/
+
 # local database
 mongod
 data/

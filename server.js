@@ -13,7 +13,8 @@ passportConfig(passport);
 
 const app = express();
 
-mongoose.connect(process.env.MONGO_URI || process.env.MONGOLAB_URI);
+mongoose.connect(process.env.MONGODB_URI ||
+  process.env.MONGO_URI || process.env.MONGOLAB_URI);
 
 app.use('/', express.static(`${process.cwd()}/public`));
 

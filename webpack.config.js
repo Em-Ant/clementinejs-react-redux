@@ -2,15 +2,31 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  devtool: 'eval',
-  entry: [
-    path.join(__dirname,'client','src','index.jsx')
-  ],
+  entry: {
+    app: path.join(__dirname,'client','src','index.jsx'),
+    vendors: [
+      'react', 'redux', 'react-redux', 'react-router',
+      'react-dom', 'redux-thunk'
+    ]
+  },
   output: {
-    path: path.join( __dirname,'client','public','static'),
+    path: path.join( __dirname,'dist', 'public','static'),
     filename: 'bundle.js',
     publicPath: '/static/'},
   target: "web",
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env':{
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
+    new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js'),
+    new webpack.optimize.UglifyJsPlugin({
+      compress:{
+        warnings: true
+      }
+    })
+  ],
   module: {
     loaders: [
       {

@@ -1,5 +1,5 @@
-Options Inc Web Application
-Copyright (c) 2016 Emanuele Antonelli and Andre Alonzo. All rights reserved.
+Clementine-React-Redux - MERN Boilerplate
+Copyright (c) 2016. All rights reserved.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

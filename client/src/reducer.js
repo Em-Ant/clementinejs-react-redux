@@ -3,31 +3,35 @@ function setClicks(state, clicks) {
   return {
     ...state,
     clicks,
-    loading : undefined,
-  }
+    loading: undefined,
+  };
 }
 
 function setLoading(state, what) {
   return {
     ...state,
     loading: what,
-  }
+  };
 }
 
-function logIn(state, user, nClicks) {
+function logIn(state, user) {
   return {
     ... state,
-    user
-  }
+    user,
+  };
 }
 
 function logOut(state) {
-  return state.set('loggedIn', false).delete('user');
+  return {
+    ...state,
+    loggedIn: false,
+    user: undefined,
+  };
 }
 
-var initState = {clicks: 0, loggedIn: false, page: 'main'};
+const initState = { clicks: 0, loggedIn: false, page: 'main' };
 
-module.exports = function(state = initState, action) {
+export default (state = initState, action) => {
   switch (action.type) {
     case 'SET_CLICKS':
       return setClicks(state, action.clicks);
@@ -41,3 +45,6 @@ module.exports = function(state = initState, action) {
       return state;
   }
 };
+
+export const getUser = state => state.user || { username: 'guest' };
+export const getClicks = state => state.clicks || '0';

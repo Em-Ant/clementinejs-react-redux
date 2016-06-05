@@ -45,7 +45,6 @@ export const click = () => (dispatch) => {
 
 export const requestUser = () => (dispatch) => {
   ajax('GET', `${appUrl}/api/user`).then(data => {
-    console.log('user', data);
     const user = data;
     if (user.unauth) {
       dispatch(logOut());

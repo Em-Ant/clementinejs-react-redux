@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -20,6 +21,7 @@ module.exports = {
         'NODE_ENV': JSON.stringify('production')
       }
     }),
+    new ExtractTextPlugin('style.css'),
     new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js'),
     new webpack.optimize.UglifyJsPlugin({
       compress:{
@@ -37,11 +39,8 @@ module.exports = {
           presets: ['react', 'es2015']
         }
       }, {
-       test: /\.css$/,
-       loaders: ['style','css']
-      }, {
         test: /\.scss$/,
-        loaders: ['style','css','sass']
+        loader: ExtractTextPlugin.extract("style-loader", "css-loader", "sass")
       }, {
         test: /\.(eot|woff|woff2|ttf|svg|png|jpg)$/,
         loader: 'file-loader?name=[name].[ext]'

@@ -1,7 +1,6 @@
 
-
 const appUrl = window.location.origin;
-const { $ } = window;
+import ajax from './utils/ajax';
 import { browserHistory as history } from 'react-router';
 
 function setClicks(nClicks) {
@@ -18,41 +17,48 @@ function logIn(user, nClicks) {
 
 export const reset = () => (dispatch) => {
   dispatch({ type: 'LOADING', what: 'clicks' });
-  $.ajax({
-    type: 'DELETE',
-    url: `${appUrl}/api/user/clicks`,
-    success() {
-      $.get(`${appUrl}/api/user/clicks`, data => {
-        const nClicks = data.clicks;
-        dispatch(setClicks(nClicks));
-      });
-    },
-  });
+  ajax(
+    'DELETE',
+   `${appUrl}/api/user/clicks`
+ ).then(() => {
+   ajax('GET', `${appUrl}/api/user/clicks`)
+   .then(data => {
+     const nClicks = data.clicks;
+     dispatch(setClicks(nClicks));
+     /* eslint-disable no-console */
+   }, error => { console.log(error); });
+ }, error => { console.log(error); });
+ /* eslint-enable no-console */
 };
 
 export const click = () => (dispatch) => {
   dispatch({ type: 'LOADING', what: 'clicks' });
-  $.post(`${appUrl}/api/user/clicks`, () => {
-    $.get(`${appUrl}/api/user/clicks`, (data) => {
+  ajax('POST', `${appUrl}/api/user/clicks`).then(() => {
+    ajax('GET', `${appUrl}/api/user/clicks`).then(data => {
       const nClicks = data.clicks;
       dispatch(setClicks(nClicks));
-    });
-  });
+    /* eslint-disable no-console */
+    }, error => { console.log(error); });
+  }, error => { console.log(error); });
+  /* eslint-enable no-console */
 };
 
 export const requestUser = () => (dispatch) => {
-  $.get(`${appUrl}/api/user`, (data) => {
+  ajax('GET', `${appUrl}/api/user`).then(data => {
+    console.log('user', data);
     const user = data;
     if (user.unauth) {
       dispatch(logOut());
       history.replace('/login');
     } else {
       history.replace('/main');
-      $.get(`${appUrl}/api/user/clicks`, (response) => {
+      ajax('GET', `${appUrl}/api/user/clicks`).then(response => {
         const nClicks = response.clicks;
         dispatch(logIn(user));
         dispatch(setClicks(nClicks));
-      });
+      /* eslint-disable no-console */
+      }, error => { console.log(error); });
     }
-  });
+  }, error => { console.log(error); });
+  /* eslint-enable no-console */
 };

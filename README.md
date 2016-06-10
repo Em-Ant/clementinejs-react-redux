@@ -7,7 +7,7 @@ Clementine.js is a lightweight boilerplate for fullstack JavaScript development 
 
 The original [Free Code Camp](http://www.freecodecamp.com) version by [@johnstonbl01](https://github.com/johnstonbl01) uses Angular 1.x as front-end framework.
 
-I modified it to obtain a **MERN Stack Isomorphic** version which uses [React](https://facebook.github.io/react/), [Redux](https://github.com/reactjs/redux), [React-router](https://github.com/reactjs/react-router) and includes Twitter authentication using [Passport](http://passportjs.org/).
+I modified it to obtain a **MERN Stack** version which uses [React](https://facebook.github.io/react/), [Redux](https://github.com/reactjs/redux), [React-router](https://github.com/reactjs/react-router) and includes Twitter authentication using [Passport](http://passportjs.org/).
 
 It also features **server-side rendering**, with a basic authorization system.
 

@@ -1,5 +1,4 @@
 
-const appUrl = window.location.origin;
 import ajax from './utils/ajax';
 import { browserHistory as history } from 'react-router';
 
@@ -19,9 +18,9 @@ export const reset = () => (dispatch) => {
   dispatch({ type: 'LOADING', what: 'clicks' });
   ajax(
     'DELETE',
-   `${appUrl}/api/user/clicks`
+   '/api/user/clicks'
  ).then(() => {
-   ajax('GET', `${appUrl}/api/user/clicks`)
+   ajax('GET', '/api/user/clicks')
    .then(data => {
      const nClicks = data.clicks;
      dispatch(setClicks(nClicks));
@@ -33,8 +32,8 @@ export const reset = () => (dispatch) => {
 
 export const click = () => (dispatch) => {
   dispatch({ type: 'LOADING', what: 'clicks' });
-  ajax('POST', `${appUrl}/api/user/clicks`).then(() => {
-    ajax('GET', `${appUrl}/api/user/clicks`).then(data => {
+  ajax('POST', '/api/user/clicks').then(() => {
+    ajax('GET', '/api/user/clicks').then(data => {
       const nClicks = data.clicks;
       dispatch(setClicks(nClicks));
     /* eslint-disable no-console */
@@ -44,14 +43,14 @@ export const click = () => (dispatch) => {
 };
 
 export const requestUser = () => (dispatch) => {
-  ajax('GET', `${appUrl}/api/user`).then(data => {
+  ajax('GET', '/api/user').then(data => {
     const user = data;
     if (user.unauth) {
       dispatch(logOut());
       history.replace('/login');
     } else {
       history.replace('/main');
-      ajax('GET', `${appUrl}/api/user/clicks`).then(response => {
+      ajax('GET', '/api/user/clicks').then(response => {
         const nClicks = response.clicks;
         dispatch(logIn(user));
         dispatch(setClicks(nClicks));

@@ -1,7 +1,6 @@
 
-const path = process.cwd();
 import ClickHandler from '../controllers/clickHandler.server';
-
+import serverRender from '../serverRender.js';
 
 export default function (app, passport) {
   function isLoggedIn(req, res, next) {
@@ -42,7 +41,9 @@ export default function (app, passport) {
 		.delete(isLoggedIn, clickHandler.resetClicks);
 
   app.route('/*')
-    .get((req, res) => {
-      res.sendFile(`${path}/public/index.html`);
-    });
+    .get(serverRender
+      // (req, res) => {
+      // res.sendFile(`${path}/public/index.html`);
+      // }
+    );
 }

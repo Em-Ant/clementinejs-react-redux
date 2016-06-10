@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   devtool: '#source-map',
@@ -20,6 +21,7 @@ module.exports = {
   },
   target: "web",
   plugins: [
+    new ExtractTextPlugin('style.css'),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
@@ -40,11 +42,8 @@ module.exports = {
         presets: ['es2015', 'react']
       }
     }, {
-      test: /\.css$/,
-      loaders: ['style', 'css']
-    }, {
       test: /\.scss$/,
-      loaders: ['style', 'css', 'sass']
+      loader: ExtractTextPlugin.extract("style-loader", "css-loader", "sass")
     }, {
      test: /\.json$/,
      loaders: ['json']

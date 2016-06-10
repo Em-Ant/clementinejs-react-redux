@@ -29,7 +29,7 @@ function logOut(state) {
   };
 }
 
-const initState = { clicks: 0, loggedIn: false, page: 'main' };
+const initState = { clicks: 0, loggedIn: false };
 
 export default (state = initState, action) => {
   switch (action.type) {

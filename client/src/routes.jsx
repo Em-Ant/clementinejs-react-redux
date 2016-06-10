@@ -3,7 +3,6 @@ import { MainContainer as Main } from './components/main.jsx';
 import Login from './components/login.jsx';
 import { ProfileContainer as Profile } from './components/profile.jsx';
 
-
 const App = ({ children }) => (
   <div>
     {children}
@@ -17,13 +16,25 @@ App.propTypes = {
   ]),
 };
 
-export const routes = {
-  path: '/',
-  component: App,
-  indexRoute: { component: Login },
-  childRoutes: [
-    { path: 'main', component: Main },
-    { path: 'profile', component: Profile },
-    { path: 'login', component: Login },
-  ],
+
+export const createRoutes = (store) => {
+  const onEnterAuth = (nextState, replace) => {
+    if (!store.getState().loggedIn) replace('/login');
+  };
+
+  const onEnterUnauth = (nextState, replace) => {
+    if (store.getState().loggedIn) replace('/main');
+  };
+
+  return {
+    path: '/',
+    component: App,
+    indexRoute: {
+      component: Main },
+    childRoutes: [
+      { path: 'main', component: Main, onEnterAuth },
+      { path: 'profile', component: Profile, onEnterAuth },
+      { path: 'login', component: Login, onEnterUnauth },
+    ],
+  };
 };

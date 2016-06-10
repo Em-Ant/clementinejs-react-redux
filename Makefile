@@ -11,6 +11,7 @@ webpack:
 babel-cli:
 	@echo "Compiling ES6..."
 	@babel app --out-dir ./dist/app && babel server.js --out-file ./dist/server.js
+	@babel client --out-dir ./dist/client 
 
 
 build: clean webpack babel-cli

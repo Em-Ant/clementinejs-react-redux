@@ -21,11 +21,11 @@ module.exports = {
   },
   target: "web",
   plugins: [
-    new ExtractTextPlugin('style.css'),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
-    new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js')
+    new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js'),
+    new ExtractTextPlugin('style.css')
   ],
   module: {
     loaders: [

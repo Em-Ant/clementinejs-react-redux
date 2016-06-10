@@ -8,6 +8,8 @@ import session from 'express-session';
 const env = process.env.NODE_ENV !== 'production' ? require('dotenv') : null;
 if (env) env.load();
 
+console.log(process.env);
+
 import passportConfig from './app/config/passport';
 passportConfig(passport);
 

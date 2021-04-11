@@ -1,7 +1,6 @@
-
 import React from 'react';
 
-export default () => (
+const Login = () => (
   <div className="container">
     <div className="login">
       <img alt="logo" src="img/clementine_150.png" />
@@ -13,3 +12,5 @@ export default () => (
     </div>
   </div>
 );
+
+export default Login;

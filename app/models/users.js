@@ -1,7 +1,6 @@
+const mongoose = require('mongoose');
 
-import mongoose, { Schema } from 'mongoose';
-
-const User = new Schema({
+const User = new mongoose.Schema({
   twitter: {
     id: String,
     displayName: String,

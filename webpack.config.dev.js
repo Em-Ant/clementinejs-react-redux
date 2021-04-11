@@ -1,55 +1,43 @@
-var path = require('path');
-var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
-  devtool: '#source-map',
+  devtool: 'cheap-source-map',
   entry: {
-    app: [
-      'webpack-hot-middleware/client',
-      path.join(__dirname, 'client', 'src', 'index.jsx')
-    ],
-    vendors: [
-      'react', 'redux', 'react-redux', 'react-router',
-      'react-dom', 'redux-thunk'
-    ]
+    main: ['webpack-hot-middleware/client', path.join(__dirname, 'client', 'src', 'index.jsx')],
   },
   output: {
     path: path.join(__dirname, 'public', 'static'),
     filename: 'bundle.js',
-    publicPath: '/static/'
+    publicPath: '/static/',
   },
-  target: "web",
+  mode: 'development',
+  target: 'web',
+  optimization: { chunkIds: 'total-size', moduleIds: 'size' },
   plugins: [
-    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-    new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js'),
-    new ExtractTextPlugin('style.css')
+    new webpack.NoEmitOnErrorsPlugin(),
   ],
+  resolve: {
+    extensions: ['*', '.js', '.jsx'],
+    modules: ['.', 'node_modules'],
+  },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.jsx?$/,
-        loader: 'react-hot',
-        exclude: /node_modules/
-      },
-      {
-      test: /\.jsx?$/,
-      loader: 'babel-loader',
-      exclude: /node_modules/,
-      query: {
-        presets: ['es2015', 'react']
-      }
-    }, {
-      test: /\.scss$/,
-      loader: ExtractTextPlugin.extract("style-loader", "css-loader", "sass")
-    }, {
-     test: /\.json$/,
-     loaders: ['json']
-    }, {
-      test: /\.(eot|woff|woff2|ttf|svg|png|jpg)$/,
-      loader: 'file-loader?name=[name].[ext]'
-    }]
-  }
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+      }, {
+        test: /\.scss$/,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      }, {
+        test: /\.json$/,
+        loader: 'json',
+      }, {
+        test: /\.(eot|woff|woff2|ttf|svg|png|jpg)$/,
+        loader: 'file-loader',
+        options: { name: '[name].[ext]' },
+      }],
+  },
 };

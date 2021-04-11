@@ -1,8 +1,7 @@
-
 import ClickHandler from '../controllers/clickHandler.server';
-import serverRender from '../serverRender.js';
+import serverRender from '../serverRender';
 
-export default function (app, passport) {
+export default function App(app, passport) {
   function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
       return next();
@@ -21,7 +20,7 @@ export default function (app, passport) {
     });
 
   app.route('/auth/twitter')
-		.get(passport.authenticate('twitter'));
+    .get(passport.authenticate('twitter'));
 
   app.route('/auth/twitter/callback')
     .get(passport.authenticate('twitter', {
@@ -36,14 +35,10 @@ export default function (app, passport) {
     });
 
   app.route('/api/user/clicks')
-		.get(isLoggedIn, clickHandler.getClicks)
-		.post(isLoggedIn, clickHandler.addClick)
-		.delete(isLoggedIn, clickHandler.resetClicks);
+    .get(isLoggedIn, clickHandler.getClicks)
+    .post(isLoggedIn, clickHandler.addClick)
+    .delete(isLoggedIn, clickHandler.resetClicks);
 
   app.route('/*')
-    .get(serverRender
-      // (req, res) => {
-      // res.sendFile(`${path}/public/index.html`);
-      // }
-    );
+    .get(serverRender);
 }

@@ -1,9 +1,10 @@
+const { Strategy: TwitterStrategy } = require('passport-twitter');
 
-import { Strategy as TwitterStrategy } from 'passport-twitter';
-import User from '../models/users';
-import configAuth from './auth';
+const User = require('../models/users');
 
-export default function (passport) {
+const configAuth = require('./auth');
+
+export default function Auth(passport) {
   passport.serializeUser((user, done) => {
     done(null, user.id);
   });
@@ -14,6 +15,7 @@ export default function (passport) {
     });
   });
 
+  /*
   passport.use(new TwitterStrategy({
     consumerKey: configAuth.twitterAuth.consumerKey,
     consumerSecret: configAuth.twitterAuth.consumerSecret,
@@ -44,4 +46,5 @@ export default function (passport) {
       });
     });
   }));
+  */
 }

@@ -5,7 +5,7 @@ clean:
 
 webpack:
 	@echo "Packing..."
-	@webpack -p --config ./webpack.config.client.js && cp -R ./public ./dist && rm -f ./dist/public/static/*.map
+	@webpack --config ./webpack.config.dev.js && cp -R ./public ./dist && rm -f ./dist/public/static/*.map
 	@NODE_ENV=production webpack -p --config ./webpack.config.server.js
 
 

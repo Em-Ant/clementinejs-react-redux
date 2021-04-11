@@ -47,7 +47,6 @@ const renderHelper = (res, location, store) => {
 export default ({ isAuthenticated, url, user }, res) => {
   if (isAuthenticated()) {
     const twitterId = user.twitter;
-    // redirect to main if logged in
     Users.findOne({ 'twitter.id': twitterId.id }, (err, response) => {
       if (err) return res.status(500).send(err.message);
       const initialState = { counter: response.nbrClicks.clicks, loggedIn: true, user };

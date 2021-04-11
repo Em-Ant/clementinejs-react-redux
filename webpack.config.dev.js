@@ -1,6 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
 
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 module.exports = {
   devtool: 'cheap-source-map',
   entry: {
@@ -17,6 +19,9 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
+    new MiniCssExtractPlugin({
+      filename: 'style.css',
+    }),
   ],
   resolve: {
     extensions: ['*', '.js', '.jsx'],
@@ -30,7 +35,7 @@ module.exports = {
         exclude: /node_modules/,
       }, {
         test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       }, {
         test: /\.json$/,
         loader: 'json',

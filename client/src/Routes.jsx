@@ -31,7 +31,6 @@ const LoginRoute = ({ children, ...props }) => {
 
   const content = isLoggedIn ? <Redirect to="/" /> : children;
 
-  console.log(isLoggedIn);
   return <Route {...props}>{content}</Route>;
 };
 
